@@ -42,6 +42,10 @@
     color: #2c3e50;
     margin-top: 60px;
   }
+  a, a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
   .router-link-exact-active {
     font-weight: bold;
   }

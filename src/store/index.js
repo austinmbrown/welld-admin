@@ -5,22 +5,27 @@ import axios from 'axios';
 Vue.use(Vuex)
 
 const LOGIN = "LOGIN";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGOUT = "LOGOUT";
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 const store = new Vuex.Store({
   state: {
-    isLoggedIn: !!localStorage.getItem("userToken") && !!localStorage.getItem("userId")
+    isLoggedIn: !!localStorage.getItem("userToken") && !!localStorage.getItem("userId"),
+    pending: false
   },
   getters: {
     isLoggedIn: state => {
       return state.isLoggedIn
+    },
+    loginPending: state => {
+      return state.pending
     }
   },
   actions: {
     login({ commit }, creds) {
-      commit(LOGIN); // show spinner
-      axios.post('/users/authenticate', creds)
+      commit(LOGIN); // show loading state
+      return axios.post('/users/authenticate', creds)
       .then(
         (response) => {
           localStorage.setItem("userId", response.data.user.id);
@@ -28,7 +33,7 @@ const store = new Vuex.Store({
           commit(LOGIN_SUCCESS);
         },
         (error) => {
-          console.log(error);
+          commit(LOGIN_FAILURE);
         }
       )
     },
@@ -44,6 +49,10 @@ const store = new Vuex.Store({
     },
     [LOGIN_SUCCESS] (state) {
       state.isLoggedIn = true;
+      state.pending = false;
+    },
+    [LOGIN_FAILURE] (state) {
+      state.isLoggedIn = false;
       state.pending = false;
     },
     [LOGOUT] (state) {

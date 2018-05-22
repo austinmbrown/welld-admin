@@ -11,6 +11,8 @@
 
       <input type="submit" v-bind:disabled='formInvalid' value="Submit">
     </form>
+    <p v-if="loginPending">Authorizing...</p>
+    <p v-if="loginFailed && !loginPending">Login failed</p>
 
   </div>
 </template>
@@ -26,8 +28,11 @@
       }
     },
     computed: {
-      formInvalid: function() {
+      formInvalid() {
         return !this.username || !this.password;
+      },
+      loginPending() {
+        return this.$store.getters.loginPending
       }
     },
     methods: {
@@ -39,7 +44,11 @@
           }
         })
         .then(() => {
-          this.$router.push("admin_dashboard")
+          if (this.$store.getters.isLoggedIn) {
+            this.$router.push("admin_dashboard");
+          } else {
+            this.loginFailed = true;
+          }
         });
       }
     }

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <h1>Welld Admin</h1>
-    <button @click="logout">Logout</button>
+    <button v-if="isLoggedIn" @click="logout">Logout</button>
     <router-view></router-view>
   </div>
 </template>
@@ -16,6 +16,11 @@
         .then(() => {
           this.$router.push("/")
         });
+      }
+    },
+    computed: {
+      isLoggedIn() {
+        return this.$store.getters.isLoggedIn;
       }
     }
   }

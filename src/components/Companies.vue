@@ -2,7 +2,7 @@
   <div>
     <h2>Companies</h2>
     <img v-if="loading" class="loader" src="../assets/loader.gif">
-    <table v-if="companies.length > 0">
+    <table v-else-if="companies.length > 0">
       <tr>
         <th>ID</th>
         <th>Company</th>
@@ -20,14 +20,10 @@
   import {mapState, mapActions} from 'vuex'
 
   export default {
-    data () {
-      return {
-        loading: false
-      }
-    },
     computed: {
       ...mapState({
-        companies: state => state.companies.companies
+        companies: state => state.companies.companies,
+        loading: state => state.companies.loading
       })
     },
     methods: {
@@ -35,10 +31,8 @@
         fetchCompanies: 'companies/fetchCompanies'
       })
     },
-    mounted () {
-      this.loading = true
+    created() {
       this.fetchCompanies()
-        .then(() => this.loading = false)
     }
   }
 </script>

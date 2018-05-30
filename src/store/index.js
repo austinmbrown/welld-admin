@@ -1,6 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 import axios from 'axios';
+import companies from './modules/companies'
 
 Vue.use(Vuex)
 
@@ -10,6 +11,9 @@ const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 const store = new Vuex.Store({
+  modules :{
+    companies
+  },
   state: {
     isLoggedIn: !!localStorage.getItem("userToken") && !!localStorage.getItem("userId"),
     pending: false

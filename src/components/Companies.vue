@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2>Companies</h2>
+    <img v-if="loading" class="loader" src="../assets/loader.gif">
     <table v-if="companies.length > 0">
       <tr>
         <th>ID</th>
@@ -16,24 +17,28 @@
 
 
 <script>
-  import axios from 'axios';
+  import {mapState, mapActions} from 'vuex'
 
   export default {
-    data: function() {
+    data () {
       return {
-        companies: []
+        loading: false
       }
     },
-    mounted: function () {
-      axios.get('/admin/companies')
-      .then(
-        (response) => {
-          this.companies = response.data.companies;
-        },
-        (error) => {
-          console.log(error);
-        }
-      )
+    computed: {
+      ...mapState({
+        companies: state => state.companies.companies
+      })
+    },
+    methods: {
+      ...mapActions({
+        fetchCompanies: 'companies/fetchCompanies'
+      })
+    },
+    mounted () {
+      this.loading = true
+      this.fetchCompanies()
+        .then(() => this.loading = false)
     }
   }
 </script>
@@ -50,5 +55,8 @@
   }
   td, th {
     border: 1px solid #2c3e50;
+  }
+  .loader {
+    max-width: 100px;
   }
 </style>

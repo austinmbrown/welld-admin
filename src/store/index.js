@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import companies from './modules/companies'
+import companies from '@/features/companies/companiesStore.js'
 
 Vue.use(Vuex)
 

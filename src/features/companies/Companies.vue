@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Companies</h2>
-    <img v-if="loading" class="loader" src="../assets/loader.gif">
+    <img v-if="loading" class="loader" src="@/assets/loader.gif">
     <table v-else-if="companies.length > 0">
       <tr>
         <th>ID</th>
@@ -49,8 +49,5 @@
   }
   td, th {
     border: 1px solid #2c3e50;
-  }
-  .loader {
-    max-width: 100px;
   }
 </style>

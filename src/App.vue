@@ -56,4 +56,7 @@
   /* .component-fade-leave-active below version 2.1.8 */ {
     opacity: 0;
   }
+  .loader {
+    max-width: 100px;
+  }
 </style>

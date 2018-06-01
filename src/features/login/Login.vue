@@ -1,8 +1,8 @@
 <template>
   <div>
     <h2>Login</h2>
-
-    <form @submit.prevent='login'>
+    <img v-if="loginPending" class="loader" src="@/assets/loader.gif">
+    <form v-else @submit.prevent='login'>
       <label for='username'>Username: </label>
       <input v-model='username' name='username'>
 
@@ -11,7 +11,7 @@
 
       <input type="submit" v-bind:disabled='formInvalid' value="Submit">
     </form>
-    <p v-if="loginPending">Authorizing...</p>
+
     <p v-if="loginFailed && !loginPending">Login failed</p>
 
   </div>

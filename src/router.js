@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Login from '@/features/login/Login'
 import AdminDashboard from '@/features/adminDashboard/AdminDashboard'
 import Companies from '@/features/companies/Companies'
-import store from '../store'
+import store from './store.js'
 
 Vue.use(Router)
 

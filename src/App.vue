@@ -46,7 +46,7 @@
     color: inherit;
     text-decoration: none;
   }
-  .router-link-exact-active {
+  .router-link-active {
     font-weight: bold;
   }
   .component-fade-enter-active, .component-fade-leave-active {

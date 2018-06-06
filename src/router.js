@@ -3,6 +3,8 @@ import Router from 'vue-router'
 import Login from '@/features/login/Login'
 import AdminDashboard from '@/features/adminDashboard/AdminDashboard'
 import Companies from '@/features/companies/Companies'
+import CompaniesNew from '@/features/companies/CompaniesNew'
+import CompaniesIndex from '@/features/companies/CompaniesIndex'
 import store from './store.js'
 
 Vue.use(Router)
@@ -11,7 +13,12 @@ const router = new Router({
   routes: [
     {path: '/',                component: Login },
     {path: '/admin_dashboard', component: AdminDashboard },
-    {path: '/companies',       component: Companies }
+    {path: '/companies',       component: Companies,
+      children: [
+        {path: '',              component: CompaniesIndex},
+        {path: 'new',           component: CompaniesNew}
+      ]
+    }
   ]
 })
 

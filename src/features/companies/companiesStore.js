@@ -25,9 +25,9 @@ export default {
   },
 
   actions: {
-    fetchCompanies({commit}) {
+    fetchCompanies ({commit}) {
       commit('startLoading')
-      axios.get('/admin/companies')
+      return axios.get('/admin/companies')
       .then(
         (response) => {
           commit('setCompanies', response.data.companies);
@@ -36,6 +36,13 @@ export default {
         (error) => {
           console.log(error);
         }
+      )
+    },
+    createCompany ({commit}, new_company) {
+      commit('startLoading')
+      return axios.post('admin/companies', {'company': new_company})
+      .then(
+        () => {commit('finishLoading')}
       )
     }
   }

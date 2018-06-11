@@ -5,7 +5,7 @@
       <th>ID</th>
       <th>Company</th>
     </tr>
-    <tr v-for="company in companies">
+    <tr v-for="company in companies" :key="company.id">
       <td>{{company.id}}</td>
       <td>{{company.name}}</td>
     </tr>

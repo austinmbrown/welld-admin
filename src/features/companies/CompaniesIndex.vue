@@ -4,10 +4,20 @@
     <tr>
       <th>ID</th>
       <th>Company</th>
+      <th>Sign up token</th>
+      <th>Fitness Clubs</th>
+      <th>Programs</th>
     </tr>
     <tr v-for="company in companies" :key="company.id">
       <td>{{company.id}}</td>
       <td>{{company.name}}</td>
+      <td>{{company.employee_signup_token}}</td>
+      <td>
+        <p v-for="club in company.fitness_clubs">{{club.name}}</p>
+      </td>
+      <td>
+        <p v-for="program in company.club_programs">{{program.name}}</p>
+      </td>
     </tr>
   </table>
 </template>
@@ -45,5 +55,9 @@
   }
   td, th {
     border: 1px solid #2c3e50;
+    padding: 4px;
+  }
+  td > p {
+    margin: 2px;
   }
 </style>

@@ -1,11 +1,23 @@
 <template>
   <div>
     <h2>Companies</h2>
-
-    <router-link to="/companies/new" tag="button">Add Company</router-link>
     <router-view></router-view>
   </div>
 </template>
+
+<script>
+  import {mapActions} from 'vuex'
+  export default {
+    methods: {
+      ...mapActions({
+        fetchCompanies: 'fetchCompanies'
+      })
+    },
+    created() {
+      this.fetchCompanies()
+    }
+  }
+</script>
 
 <style scoped>
   button {

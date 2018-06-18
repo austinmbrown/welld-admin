@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '@/features/login/Login'
 import AdminDashboard from '@/features/adminDashboard/AdminDashboard'
 import Companies from '@/features/companies/Companies'
+import CompaniesShow from '@/features/companies/CompaniesShow'
 import CompaniesNew from '@/features/companies/CompaniesNew'
 import CompaniesIndex from '@/features/companies/CompaniesIndex'
 import store from './store.js'
@@ -11,12 +12,36 @@ Vue.use(Router)
 
 const router = new Router({
   routes: [
-    {path: '/',                component: Login },
-    {path: '/admin_dashboard', component: AdminDashboard },
-    {path: '/companies',       component: Companies,
+    {
+      path: '/',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/admin_dashboard',
+      name: 'admin_dashboard',
+      component: AdminDashboard
+    },
+    {
+      path: '/companies',
+      name: 'companies',
+      component: Companies,
       children: [
-        {path: '',              component: CompaniesIndex},
-        {path: 'new',           component: CompaniesNew}
+        {
+          path: '',
+          name: 'index',
+          component: CompaniesIndex
+        },
+        {
+          path: 'new',
+          name: 'new',
+          component: CompaniesNew
+        },
+        {
+          path: ':id',
+          name: 'show',
+          component: CompaniesShow
+        }
       ]
     }
   ]

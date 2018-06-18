@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export default {
-  namespaced: true,
 
   state: {
     companies: [],
@@ -9,7 +8,9 @@ export default {
   },
 
   getters: {
-
+    getCompanyById: (state) => (id) => {
+      return state.companies.find(company => company.id.toString() == id)
+    }
   },
 
   mutations: {

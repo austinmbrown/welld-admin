@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <img v-if="loading" class="loader" src="@/assets/loader.gif">
+  <div v-else >
     <router-link to="/companies" tag="button">Cancel</router-link>
-    <img v-if="loading" class="loader" src="@/assets/loader.gif">
-    <form v-else @submit.prevent='submitCompany'>
+    <form @submit.prevent='submitCompany'>
       <div class="input-container">
         <label for='name'>Name: </label>
         <input v-model='new_company.name' name='name'>
@@ -73,7 +73,7 @@
     },
     methods: {
       submitCompany: function() {
-        this.$store.dispatch("companies/createCompany", this.new_company)
+        this.$store.dispatch("createCompany", this.new_company)
         .then(() => {
           this.$router.push('/companies')
         })
